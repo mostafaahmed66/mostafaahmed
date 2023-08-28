@@ -1,43 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<x-app-layout>
+    <head>
     <title>Document</title>
 </head>
 <body>
+
+ 
+<div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div> <form action="/products/search" method="POST">
+    @csrf
+    <input type="text" name="keyword" placeholder="Search products">
+    <button type="submit">Search</button>
+</form>
+
+
+<!-- <h1>{{ Auth::user()->name }}</h1> -->
 
    <table>
     <thead>
         <tr>
             <th>Product name</th>
             <th>Product price</th>
-            <th>Product validation</th>
+            <th>Product availability</th>
             <!-- <th>actions</th>  -->
         </tr>
     </thead>
     <tbody>
         @foreach($products as $product)
         <tr>
-            <td>{{ $product->name }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->description }}</td>
+            <td>{{ $product->product_name }}</td>
+            <td>{{ $product->product_price }}</td>
+            <td>{{ $product->product_availability }}</td>
+            
             
             <td>
-                
-                <!-- <form action="{ route('products.show',$product->product_id) }}"> 
+    <a href="{{ route('product.addToCart', $product->product_id) }}"  role="button">Add to cart</a> 
+
+<!--                 
+                <form action="{{ route('product.show',$product->product_id) }}"> 
                 <input type="submit" value="showone">
                 </form>
-                <form action="{ route('products.edit',$product->product_id) }}">
+               
+                 <form action="{{ route('product.edit',$product->product_id) }}">
                     <input type="submit" value="edit">
                 </form>
-                <form action="{ route('products.destroy',$product->product_id) }}" method="post">
+                <form action="{{ route('product.delete',$product->product_id) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <input type="submit" value="delete">
-                </form>
-                 -->
+                </form> -->
+                
               
                 
             </td>
@@ -46,6 +61,10 @@
        
     </tbody>
    </table>
-
-</body>
-</html>
+</div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
